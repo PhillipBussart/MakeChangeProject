@@ -13,4 +13,5 @@ This project was assigned after Week 1 of Skill Distillery's Java Coding School.
 * Java
 * Java operators, especially %
 
+
 ### Lessons Learned
