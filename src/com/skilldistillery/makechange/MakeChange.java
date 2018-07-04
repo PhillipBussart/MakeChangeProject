@@ -28,6 +28,8 @@ public class MakeChange {
 		double payment = sc.nextDouble();
 		
 		//Output if amount was too little or exact change
+		checkPayment(price, payment);
+		
 		
 		//Call method checkPayment to check amount is <= price & output if either is true
 		
@@ -42,19 +44,37 @@ public class MakeChange {
 	public static void checkPayment(double price, double payment) {
 		if (price < payment) {
 			//call calculateChange
+			double change = calculateChange(price, payment);
+			System.out.println("Your change is: $" + change);
 		}
 		if (price == payment) {
 			System.out.println("No change needed.");
 		}
 		if (price > payment) {
 			price = price - payment;
-			System.out.println("Amount still owed: " + price); //possibly make loop so customer can give more
+			System.out.println("Amount still owed: $" + price); //possibly make loop so customer can give more
 		}
 	}
 	
-	public static double calculateChange (double price, double payment, double change) {
+	public static double calculateChange (double price, double payment) {
+		//check change for bill and coin denominations
+		double change = payment - price;
 		
 		return change;
+	}
+	public static double changeDollars(double change) {
+		double changeDollars = 0.0;
+		//take change and divide by 1 to get cents
+		//if (change % 1 != 0) {
+		//}
+		
+		return changeDollars;
+	}
+	public static double changeCents (double change) {
+		//set change to cents value
+		double changeCents = change % (int)change; //cast to int for whole number
+		
+		return changeCents;
 	}
 
 }
