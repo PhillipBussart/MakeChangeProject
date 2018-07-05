@@ -18,32 +18,34 @@ public class MakeChange {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		
-		//Prompt user for price of item
+
+
+		// Prompt user for price of item
 		System.out.print("Item price: $");
 		double price = sc.nextDouble();
-		
-		//Ask for amount tendered by customer
+
+		// Ask for amount tendered by customer
 		System.out.print("Amount given: $");
 		double payment = sc.nextDouble();
-		
-		//Output if amount was too little or exact change
+
+		// Output if amount was too little or exact change
 		checkPayment(price, payment);
-		
-		
-		//Call method checkPayment to check amount is <= price & output if either is true
-		
-		//If amount tendered is more than item cost, display change and number of bills and coins
-		//that should be given back.
-		
-		//Call a method to calculate and display change, perhaps within checkPayment
-		
+
+		// Call method checkPayment to check amount is <= price & output if either is
+		// true
+
+		// If amount tendered is more than item cost, display change and number of bills
+		// and coins
+		// that should be given back.
+
+		// Call a method to calculate and display change, perhaps within checkPayment
+
 		sc.close();
 	}
-	
+
 	public static void checkPayment(double price, double payment) {
 		if (price < payment) {
-			//call calculateChange
+			// call calculateChange
 			double change = calculateChange(price, payment);
 			System.out.println("Your change is: $" + change);
 		}
@@ -52,29 +54,37 @@ public class MakeChange {
 		}
 		if (price > payment) {
 			price = price - payment;
-			System.out.println("Amount still owed: $" + price); //possibly make loop so customer can give more
+			System.out.println("Amount still owed: $" + price); // possibly make loop so customer can give more
 		}
 	}
-	
-	public static double calculateChange (double price, double payment) {
-		//check change for bill and coin denominations
+
+	public static double calculateChange(double price, double payment) {
+		// check change for bill and coin denominations
 		double change = payment - price;
+
+		String changeNames[] = { "twenties", "tens", "fives", "ones", 
+				"quarters", "dimes", "nickels", "pennies" };
+		
+		double changeAmounts[] = {20.00, 10.00, 5.00, 1.00, 
+				0.25, 0.10, 0.05, 0.01};
 		
 		return change;
 	}
-	public static double changeDollars(double change) {
-		double changeDollars = 0.0;
-		//take change and divide by 1 to get cents
-		//if (change % 1 != 0) {
-		//}
-		
-		return changeDollars;
-	}
-	public static double changeCents (double change) {
-		//set change to cents value
-		double changeCents = change % (int)change; //cast to int for whole number
-		
-		return changeCents;
-	}
+
+//	public static double changeDollars(double change) {
+//		double changeDollars = 0.0;
+//		// take change and divide by 1 to get cents
+//		// if (change % 1 != 0) {
+//		// }
+//
+//		return changeDollars;
+//	}
+//
+//	public static double changeCents(double change) {
+//		// set change to cents value
+//		double changeCents = change % (int) change; // cast to int for whole number
+//
+//		return changeCents;
+//	}
 
 }
