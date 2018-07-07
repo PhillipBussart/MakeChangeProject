@@ -18,8 +18,7 @@ public class MakeChange {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		double changeNumbers[] = { 20.00, 10.00, 5.00, 1.00, 0.25, 0.10, 0.05, 0.01 }; // amounts that go with the names
-																						// for output
+		int changeBills[] = new int [8];
 
 		// Prompt user for price of item
 		System.out.print("Item price: $");
@@ -32,27 +31,29 @@ public class MakeChange {
 		// Call method checkPayment to check amount is <= price & output if either is
 		// true
 		checkPayment(price, payment);
-		double change = calculateChange(price, payment);
-		changeNumbers[0] = (int) change / 20;
-		change = change - 20 * changeNumbers[0];
-		changeNumbers[1] = (int) change / 10;// divide remainder from above calculation by 10
-		change = change - 10 * changeNumbers[1];
-		changeNumbers[2] = (int) change / 5;// divide remainder from above calculation by 5
-		change = change - 5 * changeNumbers[2];
-		changeNumbers[3] = (int) change;// print out remaining numbers after above 3 calculations are done
-		change = change - (int) change;
-		//math is much different below. need to use remainders?
-		changeNumbers[4] = change / 0.25;
-		change = change - changeNumbers[4];
-		changeNumbers[5] = change / 0.10;
-		change = change - changeNumbers[5];
-		changeNumbers[6] = change / 0.05;
-		change = change - changeNumbers[6];
-		changeNumbers[7] = change;
+		double changeDue = calculateChange(price, payment);
+		changeBills[0] = (int) changeDue / 20; //how many 20s
+		changeDue %= 20; //change leftover
+		changeBills[1] = (int) changeDue / 10;
+		changeDue %= 10;
+		changeBills[2] = (int) changeDue / 5;
+		changeDue %= 5;
+		changeBills[3] = (int) changeDue; //how many 1s
+		changeDue %= 1; //returns coins
+		
+		changeDue = changeDue*100; //must make coins ints to continue counting
+		
+		changeBills[4] = (int)changeDue / 25;
+		changeDue %= 25;
+		changeBills[5] = (int)changeDue / 10;
+		changeDue %= 10;
+		changeBills[6] = (int)changeDue / 5;
+		changeDue %= 5;
+		changeBills[7] = (int)changeDue;
 
 		// If amount tendered is more than item cost, display change and number of bills
 		// and coins that should be given back.
-		printChange(changeNumbers);
+		printChange(changeBills);
 		// Call a method to calculate and display change
 
 		sc.close();
@@ -70,56 +71,37 @@ public class MakeChange {
 		}
 		if (price > payment) {
 			price = price - payment;
-			System.out.println("Amount still owed: $" + price); // possibly make loop so customer can give more
+			System.out.println("Payment must be greater than or equal to the item price."); 
 		}
 	}
 
 	public static double calculateChange(double price, double payment) {
 		// check change for bill and coin denominations
-		double change = payment - price;
-
-		return change;
+		double changeDue = payment - price;
+		//need to round to 2 decimal places
+		return changeDue;
 	}
 
-	public static void printChange(double[] changeNames) {
+	public static void printChange(int[] changeBills) {
 
-		for (int i = 0; i < changeNames.length; i++) {
-			System.out.println(changeNames[i]);
-//			if (i != changeNames.length - 1) { // don't do this for the last index
-//				System.out.println(", ");
-//			}
-		}
-
-	}
-
-	// need to use changeAmount to calculate how many bills/coins necessary for
-	// change
-	// then return the appropriate names in changeNames. Might need to move
-	// changeNames to main
-//	public static void changeAmount(double[] changeNumbers) {
-//		//double changeAmount = change;
-//		//need code to count how many times each of changeAmounts occurs, then output changeNames
-//		//for loop?
-//		for (int i = 0; i < changeNumbers.length; i++) {
-//			if ((int)change % 20 == 0) { //if divisible by 20
-//				changeNumbers[0] = (int)change / 20;
-//				//this sets first position of array to change/20.
-//			}
-//			if ((int)change % 10 == 0) {
-//				changeNumbers[1] = (int)change / 10;
-//			}
-//			if ((int)change % 5 == 0) {
-//				changeNumbers[2] = (int)change / 5;
-//			}
-//			changeNumbers[3] = ((int) change - changeNumbers[0] - changeNumbers[1] - changeNumbers[2]); //need to set 1s to whatever is left
+//		for (int i = 0; i < changeBills.length; i++) {
+//			System.out.println(changeBills[i]);
+////			if (i != changeNames.length - 1) { // don't do this for the last index
+////				System.out.println(", ");
+////			}
 //		}
+		System.out.println(changeBills[0] + " Twenties");
+		System.out.println(changeBills[1] + " Tens");
+		System.out.println(changeBills[2] + " Fives");
+		System.out.println(changeBills[3] + " Ones");
+		System.out.println(changeBills[4] + " Quarters");
+		System.out.println(changeBills[5] + " Dimes");
+		System.out.println(changeBills[6] + " Nickels");
+		System.out.println(changeBills[7] + " Pennies");
 
-	// take change and divide by 1 to get cents
-	// if (change % 1 != 0) {
-	// }
+	}
 
-//		return change;//possibly returning array
-//	}
+
 //
 //	public static double changeCents(double change) {
 //		// set change to cents value
