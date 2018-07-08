@@ -1,8 +1,8 @@
 //read chapters 1-5 in book
 /*Things to check for:
-* Amount: .67, Tendered: .50, Result: Error message
-* Amount: .67, Tendered: 1.00, Result: 1 quarter, 1 nickel, 3 pennies.
-* Amount: .59, Tendered: 1.00, Result: 1 quarter, 1 dime, 1 nickel, 1 penny.
+~~~* Amount: .67, Tendered: .50, Result: Error message
+~~~* Amount: .67, Tendered: 1.00, Result: 1 quarter, 1 nickel, 3 pennies.
+~~~* Amount: .59, Tendered: 1.00, Result: 1 quarter, 1 dime, 1 nickel, 1 penny.
 * Amount: 3.96, Tendered: 20.00, Result: 1 ten dollar bill, 1 five dollar bill, 
 * 	1 one dollar bill, 4 pennies.
 * Amount: any amount less than 20.00, Tendered: anything greater than amount: 
@@ -105,9 +105,9 @@ public class MakeChange {
 		double remainder = (changeDue % (int) changeDue);
 		if (remainder != 0.00) {
 			if (remainder >= 0.5) {
-				changeDue = changeDue + 1.0;
+				changeDue = (int)changeDue + 1.0;
 			} else if (remainder < 0.5) {
-
+				changeDue = (int)changeDue - 1.0;
 			}
 		}
 
