@@ -1,4 +1,3 @@
-//push to git hourly!!!
 //read chapters 1-5 in book
 /*Things to check for:
 * Amount: .67, Tendered: .50, Result: Error message
@@ -18,7 +17,6 @@ public class MakeChange {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int changeBills[] = new int [8];
 
 		// Prompt user for price of item
 		System.out.print("Item price: $");
@@ -31,65 +29,64 @@ public class MakeChange {
 		// Call method checkPayment to check amount is <= price & output if either is
 		// true
 		checkPayment(price, payment);
-		double changeDue = calculateChange(price, payment);
-		changeBills[0] = (int) changeDue / 20; //how many 20s
-		changeDue %= 20; //change leftover
-		changeBills[1] = (int) changeDue / 10;
-		changeDue %= 10;
-		changeBills[2] = (int) changeDue / 5;
-		changeDue %= 5;
-		changeBills[3] = (int) changeDue; //how many 1s
-		changeDue %= 1; //returns coins
-		
-		changeDue = changeDue*100; //must make coins ints to continue counting
-		
-		changeBills[4] = (int)changeDue / 25;
-		changeDue %= 25;
-		changeBills[5] = (int)changeDue / 10;
-		changeDue %= 10;
-		changeBills[6] = (int)changeDue / 5;
-		changeDue %= 5;
-		changeBills[7] = (int)changeDue;
-
-		// If amount tendered is more than item cost, display change and number of bills
-		// and coins that should be given back.
-		printChange(changeBills);
-		// Call a method to calculate and display change
 
 		sc.close();
 	}
 
 	public static void checkPayment(double price, double payment) {
-		double change = calculateChange(price, payment);
+		double changeDue = calculateChange(price, payment);
+		int changeBills[] = new int[8];
 		if (price < payment) {
 			// call calculateChange
-			System.out.println("Change is: $" + change);
-			// change = changeAmount(change);//might need to change variable on left side?
+			//double changeDue = calculateChange(price, payment);
+			System.out.println("Change is: $" + changeDue);
+			changeBills[0] = (int) changeDue / 20; // how many 20s
+			changeDue %= 20; // change leftover
+			changeBills[1] = (int) changeDue / 10;
+			changeDue %= 10;
+			changeBills[2] = (int) changeDue / 5;
+			changeDue %= 5;
+			changeBills[3] = (int) changeDue; // how many 1s
+			changeDue %= 1; // returns coins
+
+			changeDue = changeDue * 100; // must make coins ints to continue counting
+
+			changeBills[4] = (int) changeDue / 25;
+			changeDue %= 25;
+			changeBills[5] = (int) changeDue / 10;
+			changeDue %= 10;
+			changeBills[6] = (int) changeDue / 5;
+			changeDue %= 5;
+			changeBills[7] = (int) changeDue;
+			// If amount tendered is more than item cost, display change and number of bills
+			// and coins that should be given back.
+			// Call a method to calculate and display change
+			printChange(changeBills); // prints respective bills
 		}
 		if (price == payment) {
 			System.out.println("No change needed.");
 		}
 		if (price > payment) {
 			price = price - payment;
-			System.out.println("Payment must be greater than or equal to the item price."); 
+			System.err.println("Payment must be greater than or equal to the item price.");
+		}
+		if (payment <= 00 || price <= 0) {
+			System.err.println("Error: Cash cannot be negative.");
 		}
 	}
 
 	public static double calculateChange(double price, double payment) {
 		// check change for bill and coin denominations
 		double changeDue = payment - price;
-		//need to round to 2 decimal places
+		// need to round to 2 decimal places
+
+		changeDue = roundChange(changeDue);
+
 		return changeDue;
 	}
 
 	public static void printChange(int[] changeBills) {
 
-//		for (int i = 0; i < changeBills.length; i++) {
-//			System.out.println(changeBills[i]);
-////			if (i != changeNames.length - 1) { // don't do this for the last index
-////				System.out.println(", ");
-////			}
-//		}
 		System.out.println(changeBills[0] + " Twenties");
 		System.out.println(changeBills[1] + " Tens");
 		System.out.println(changeBills[2] + " Fives");
@@ -101,15 +98,22 @@ public class MakeChange {
 
 	}
 
+	public static double roundChange(double changeDue) {
 
-//
-//	public static double changeCents(double change) {
-//		// set change to cents value
-//		double changeCents = change % (int) change; // cast to int for whole number
-//
-//		return changeCents;
-//	}
+		changeDue = changeDue * 100.0;
 
-//		      String changeNames[] = { "Twenties", "Tens", "Fives", "Ones", 
-//		    		  "Quarters", "Dimes", "Nickels", "Pennies" }; //names for output
+		double remainder = (changeDue % (int) changeDue);
+		if (remainder != 0.00) {
+			if (remainder >= 0.5) {
+				changeDue = changeDue + 1.0;
+			} else if (remainder < 0.5) {
+
+			}
+		}
+
+		changeDue = changeDue / 100.00;
+
+		return changeDue;
+	}
+
 }
