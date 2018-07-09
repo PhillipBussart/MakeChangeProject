@@ -15,3 +15,5 @@ This project was assigned after Week 1 of Skill Distillery's Java Coding School.
 
 
 ### Lessons Learned
+* There's many ways to code the same thing
+* Logical errors can be difficult to pinpoint
